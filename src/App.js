@@ -11,6 +11,9 @@ import OpenAI from "openai";
 import TextareaAutosize from "react-textarea-autosize";
 import {ThreeDots} from "react-loader-spinner";
 
+const ex_q = `Technology has significantly altered the way we communicate in modern society. While there are positive aspects to these changes, there are also negative ones. Discuss the impact of technology on communication and share your perspective.`
+const ex_a = `My opinion of trchnology is a strongly positive aspect. By technology, people who live in modern can communicate regardless of time and region. Before the technology developed , people should face someone who they want to communicate. So, if you don't know where he is, you can't talk to him. Additonlly, if he is sleeping, you should wait until he wake up. But after the technology developed, most of people use cell phones and email service. By using texts, emails or something else, we can touch others regardless of when it is, and where you are. I think the development of technology change our life style. Of course, there is negatice aspect which people have a lot of stress because of getting bussines texts even it is weekend. But I think after the culture which thinks others' stress is made, it isn't problem. My opinion of trchnology thus is a strongly positive aspect.`
+
 function App() {
   const [offTopicFeedback, setOffTopicFeedback] = useState("");
   const [varietyFeedback, setVarietyFeedback] = useState("");
@@ -50,7 +53,7 @@ function App() {
       messages: createMessages(question, answer, FeedbackType.OFF_TOPIC),
       model: model,
       max_tokens: 180,
-      temperature: 0.3
+      temperature: 0.3,
     });
 
     const varietyCompletion = await openai.current.chat.completions.create({
@@ -102,6 +105,7 @@ function App() {
               onChange={handleQuestionChange}
               minRows={10}
               placeholder="문제를 입력하세요"
+              value={question}
             />
           </div>
           <div className="prompt-container">
@@ -112,39 +116,48 @@ function App() {
               onChange={handleAnswerChange}
               minRows={10}
               placeholder="답안을 입력하세요"
+              value={answer}
             />
-            <span className="answer-count">{answer.length} characters, {answer.split(/\s+/).length} words</span>
+            <span className="answer-count">
+              {answer.length} characters, {answer.split(/\s+/).length} words
+            </span>
           </div>
-          <button
-            className="submit-button"
-            style={{
-              backgroundColor: "#089E9D",
-              border: "none",
-              color: "white",
-              fontSize: 20,
-              padding: 16,
-              borderRadius: 12,
-              fontWeight: "normal",
-              fontFamily: "Fira Code",
-            }}
-            type="submit"
-            onClick={onFeedbackButtonPressed}
-          >
-            {isLoading ? (
-              <ThreeDots
-                visible={true}
-                height="60"
-                width="30"
-                color="white"
-                radius="9"
-                ariaLabel="three-dots-loading"
-                wrapperStyle={{}}
-                wrapperClass=""
-              />
-            ) : (
-              "Get Feedback ->"
-            )}
-          </button>
+          <div className="button-section">
+            <button className="sample-test-button" onClick={() => {
+              setQuestion(ex_q)
+              setAnswer(ex_a)
+            }}>샘플 테스트해보기</button>
+            <button
+              className="submit-button"
+              style={{
+                backgroundColor: "#089E9D",
+                border: "none",
+                color: "white",
+                fontSize: 20,
+                padding: 16,
+                borderRadius: 12,
+                fontWeight: "normal",
+                fontFamily: "Fira Code",
+              }}
+              type="submit"
+              onClick={onFeedbackButtonPressed}
+            >
+              {isLoading ? (
+                <ThreeDots
+                  visible={true}
+                  height="60"
+                  width="30"
+                  color="white"
+                  radius="9"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+              ) : (
+                "Get Feedback ->"
+              )}
+            </button>
+          </div>
         </div>
 
         <div className="output-panel">

@@ -107,3 +107,15 @@
   align-items: center;
   height: 4rem;
 }
+
+.button-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.sample-test-button {
+  height: 2rem;
+  margin-right: 1rem;
+}
