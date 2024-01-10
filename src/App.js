@@ -49,7 +49,8 @@ function App() {
     const offTopicCompletion = await openai.current.chat.completions.create({
       messages: createMessages(question, answer, FeedbackType.OFF_TOPIC),
       model: model,
-      max_tokens: 250,
+      max_tokens: 180,
+      temperature: 0.3
     });
 
     const varietyCompletion = await openai.current.chat.completions.create({
@@ -59,13 +60,13 @@ function App() {
         FeedbackType.STRUCTURE_VARIETY
       ),
       model: model,
-      max_tokens: 250,
+      max_tokens: 180,
     });
 
     const elaborationCompletion = await openai.current.chat.completions.create({
       messages: createMessages(question, answer, FeedbackType.ELABORATION),
       model: model,
-      max_tokens: 250,
+      max_tokens: 180,
     });
 
     const offTopicComment = offTopicCompletion.choices[0].message.content;
@@ -94,7 +95,7 @@ function App() {
       <div className="content-container">
         <div className="input-panel">
           <div className="prompt-container">
-            <label>Question</label>
+            <label className="prompt-label">Question</label>
             <textarea
               className="prompt-textarea"
               rows={10}
@@ -104,7 +105,7 @@ function App() {
             />
           </div>
           <div className="prompt-container">
-            <label>Your Answer</label>
+            <label className="prompt-label">Your Answer</label>
             <TextareaAutosize
               className="prompt-textarea"
               rows={10}

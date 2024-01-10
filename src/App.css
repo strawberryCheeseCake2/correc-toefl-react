@@ -29,6 +29,7 @@
   text-align: center;
   color: white;
   font-family: 'Fredoka', sans-serif;
+  font-size: 2rem;
   /* font-family: 'Tilt Warp', sans-serif; */
 }
 
@@ -68,10 +69,15 @@
   padding: 16px;
   resize: none;
   outline-color: #089E9D;
+  font-size: 1rem;
+}
+
+.prompt-label {
+  font-size: 1.2rem;
 }
 
 .prompt-textarea::-webkit-scrollbar {
-  display: none;
+
 }
 
 .answer-count {
