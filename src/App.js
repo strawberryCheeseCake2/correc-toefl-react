@@ -113,7 +113,7 @@ function App() {
               minRows={10}
               placeholder="답안을 입력하세요"
             />
-            <span className="answer-count">{answer.length}</span>
+            <span className="answer-count">{answer.length} characters, {answer.split(/\s+/).length} words</span>
           </div>
           <button
             className="submit-button"
